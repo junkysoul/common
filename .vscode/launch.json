@@ -5,10 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "preLaunchTask": "build",
             "name": "Launch Program",
             "program": "${workspaceFolder}/dist/index.js",
             "request": "launch",
-            "type": "node"
+            "type": "node",
         }
     ]
 }
