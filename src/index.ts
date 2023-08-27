@@ -1,8 +1,8 @@
 import { config } from "./config";
 import { Spot } from "@binance/connector";
 
-const apiKey = "";
-const apiSecret = "";
+const apiKey = config.binanceApiKey;
+const apiSecret = config.binanceApiSecretKey;
 const client = new Spot(apiKey, apiSecret);
 
 // Get account information
