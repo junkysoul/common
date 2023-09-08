@@ -1,7 +1,7 @@
 /api/node_modules
 /ui/node_modules
 /api/dist
-/api/src/config.ts
 /ui/build
 /.idea
+/.idea/workspace.xml
 /.vscode
