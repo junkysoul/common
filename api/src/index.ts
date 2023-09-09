@@ -1,33 +1,21 @@
 import { config } from "./config";
 import { Spot } from "@binance/connector";
-import { WebsocketStream } from "@binance/connector";
+//import { WebsocketStream } from "@binance/connector";
 import * as fs from "fs";
-import { OrderExecutionReport } from "./types";
+//import { OrderExecutionReport } from "./types";
+import {copyTrade} from "./copy_trading";
 
-const { Console } = console;
-const websocketOut = fs.createWriteStream("./logs/websocket/out.log");
-const websocketErr = fs.createWriteStream("./logs/websocket/err.log");
+//const { Console } = console;
+//const websocketOut = fs.createWriteStream("./logs/websocket/out.log");
+//const websocketErr = fs.createWriteStream("./logs/websocket/err.log");
 
 const donorApiKey = config.binanceApiKey;
-const donorApiSecret = config.binanceApiKey;
+//const donorApiSecret = config.binanceApiKey;
 
-const client = new Spot(donorApiKey);
+//const client = new Spot(donorApiKey);
 
 (async function () {
-  const listenKey = (await client.createListenKey()).data.listenKey;
-
-  const logger = new Console({ stdout: websocketOut, stderr: websocketErr });
-
-  const callbacks = {
-    open: () => logger.debug("Connected with Websocket server"),
-    close: () => logger.debug("Disconnected with Websocket server"),
-    message: (data: OrderExecutionReport) => logger.info(data),
-  };
-
-  const websocketStreamClient = new WebsocketStream({ logger, callbacks });
-  websocketStreamClient.userData(listenKey);
-
-  setTimeout(() => websocketStreamClient.disconnect(), 600000);
+  await copyTrade();
 })();
 
 //const apiKey = config.binanceApiKey;
