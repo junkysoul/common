@@ -1,21 +1,12 @@
-import { config } from "./config";
-import { Spot } from "@binance/connector";
-//import { WebsocketStream } from "@binance/connector";
-import * as fs from "fs";
-//import { OrderExecutionReport } from "./types";
 import {copyTrade} from "./copy_trading";
+import {getMarketMakingInfo} from "./bots/market_making/main";
 
-//const { Console } = console;
-//const websocketOut = fs.createWriteStream("./logs/websocket/out.log");
-//const websocketErr = fs.createWriteStream("./logs/websocket/err.log");
-
-const donorApiKey = config.binanceApiKey;
-//const donorApiSecret = config.binanceApiKey;
-
-//const client = new Spot(donorApiKey);
+/*(async function () {
+  await copyTrade();
+})();*/
 
 (async function () {
-  await copyTrade();
+  await getMarketMakingInfo();
 })();
 
 //const apiKey = config.binanceApiKey;
