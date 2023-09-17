@@ -2,29 +2,24 @@ import { config } from "./config";
 import { Spot } from "@binance/connector";
 import { WebsocketStream } from "@binance/connector";
 import * as fs from "fs";
-import { OrderExecutionReport } from "./types";
+import {ApiResponse, OrderExecutionReport} from "./types";
 
 const { Console } = console;
 const websocketOut = fs.createWriteStream("./logs/websocket/out.log");
 const websocketErr = fs.createWriteStream("./logs/websocket/err.log");
 
 const donorApiKey = config.binanceApiKey;
-const donorApiSecret = config.binanceApiKey;
-
-
+const donorApiSecret = config.binanceApiSecretKey;
 
 export async function copyTrade(){
 
     const client = new Spot(donorApiKey, donorApiSecret);
-
     const logger = new Console({ stdout: websocketOut, stderr: websocketErr });
 
-    /*const spotWallet = (await client.accountSnapshot('SPOT')).data;
-    console.log(spotWallet);*/
-
-    client.accountSnapshot('SPOT')
-        .then(response => client.logger.log(response.data))
-        .catch(error => client.logger.error(error));
+    const spotWallet:ApiResponse = (await client.accountSnapshot('SPOT')).data;
+    const {snapshotVos} = spotWallet;
+    const lastSnapshotVos = snapshotVos.at(-1);
+    console.log(lastSnapshotVos?.type);
 
     const listenKey = (await client.createListenKey()).data.listenKey;
 
