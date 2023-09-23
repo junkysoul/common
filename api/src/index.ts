@@ -1,12 +1,22 @@
 import {copyTrade} from "./copy_trading";
 import {getMarketMakingInfo} from "./bots/market_making/main";
+import {tradeFlow} from "./bots/trade_flow/main";
+import {getHistoryData} from "./get_history_data/main";
 
 /*(async function () {
   await copyTrade();
 })();*/
 
-(async function () {
+/*(async function () {
   await getMarketMakingInfo();
+})();*/
+
+/*(async function () {
+  await tradeFlow();
+})();*/
+
+(async function () {
+  await getHistoryData();
 })();
 
 //const apiKey = config.binanceApiKey;
